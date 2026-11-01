@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f1115">
+<meta name="description" content="Live web apps built by Nathan Steele for youth sports leagues, coaches, families and everyday use.">
 <title>Nathan Steele — App Portfolio</title>
 <style>
   :root{
@@ -12,9 +14,11 @@
     --border:#2a2f3a;
     --text:#eef0f4;
     --muted:#9aa2b1;
-    --accent:#ff6a3d;
-    --accent-2:#3ddc97;
-    --accent-3:#4d9dff;
+    --football:#ff6a3d;
+    --baseball:#4d9dff;
+    --cards:#3ddc97;
+    --family:#b98bff;
+    --private:#e2b32c;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -28,186 +32,90 @@
   a{color:inherit;}
 
   /* Hero */
-  .hero{
-    padding:96px 24px 72px;
-    text-align:center;
-    max-width:760px;
-    margin:0 auto;
-  }
-  .hero .kicker{
-    text-transform:uppercase;
-    letter-spacing:.14em;
-    font-size:12px;
-    color:var(--accent-2);
-    font-weight:600;
-    margin-bottom:14px;
-  }
-  .hero h1{
-    font-size:42px;
-    margin:0 0 16px;
-    letter-spacing:-0.02em;
-  }
-  .hero p{
-    color:var(--muted);
-    font-size:17px;
-    margin:0 auto;
-    max-width:560px;
-  }
-  .hero-nav{
-    display:flex;
-    gap:12px;
-    justify-content:center;
-    flex-wrap:wrap;
-    margin-top:32px;
-  }
-  .hero-nav a{
-    text-decoration:none;
-    font-size:13px;
-    padding:8px 16px;
-    border:1px solid var(--border);
-    border-radius:999px;
-    color:var(--muted);
-    transition:.15s;
-  }
-  .hero-nav a:hover{border-color:var(--accent-3);color:var(--text);}
+  .hero{padding:96px 24px 56px;text-align:center;max-width:760px;margin:0 auto;}
+  .hero .kicker{text-transform:uppercase;letter-spacing:.14em;font-size:12px;color:var(--cards);font-weight:600;margin-bottom:14px;}
+  .hero h1{font-size:42px;margin:0 0 16px;letter-spacing:-0.02em;}
+  .hero p{color:var(--muted);font-size:17px;margin:0 auto;max-width:580px;}
+  .stats{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin-top:28px;}
+  .stats div{font-size:13px;color:var(--muted);}
+  .stats b{display:block;font-size:26px;color:var(--text);letter-spacing:-0.02em;}
+  .hero-nav{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:32px;}
+  .hero-nav a{text-decoration:none;font-size:13px;padding:8px 16px;border:1px solid var(--border);border-radius:999px;color:var(--muted);transition:.15s;}
+  .hero-nav a:hover{border-color:var(--ac,var(--baseball));color:var(--text);}
 
-  /* Project section */
-  .project{
-    max-width:960px;
-    margin:0 auto 88px;
-    padding:0 24px;
-  }
-  .project-card{
+  /* Sections */
+  .group{max-width:1040px;margin:0 auto 72px;padding:0 24px;scroll-margin-top:24px;}
+  .group-head{display:flex;align-items:baseline;gap:12px;margin:0 0 20px;border-bottom:1px solid var(--border);padding-bottom:12px;}
+  .group-head h2{font-size:22px;margin:0;letter-spacing:-0.01em;}
+  .group-head span{color:var(--muted);font-size:14px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
+
+  /* App card */
+  .app{
+    display:flex;flex-direction:column;
     background:linear-gradient(180deg,var(--panel),var(--panel-2));
     border:1px solid var(--border);
     border-radius:20px;
-    padding:48px;
+    padding:28px;
+    transition:border-color .15s, transform .15s;
   }
-  .project-eyebrow{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    font-size:12px;
-    font-weight:700;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    padding:5px 12px;
-    border-radius:999px;
-    margin-bottom:18px;
+  .app:hover{border-color:var(--ac);transform:translateY(-2px);}
+  .eyebrow{
+    align-self:flex-start;
+    font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    padding:5px 12px;border-radius:999px;margin-bottom:14px;
+    background:color-mix(in srgb,var(--ac) 14%,transparent);color:var(--ac);
   }
-  .project h2{
-    font-size:30px;
-    margin:0 0 6px;
-    letter-spacing:-0.01em;
-  }
-  .project .subtitle{
-    color:var(--muted);
-    font-size:15px;
-    margin:0 0 20px;
-  }
-  .project .blurb{
-    font-size:16px;
-    color:#d6dae2;
-    max-width:640px;
-    margin:0 0 32px;
-  }
+  .app h3{font-size:21px;margin:0 0 4px;letter-spacing:-0.01em;}
+  .app .subtitle{color:var(--muted);font-size:14px;margin:0 0 14px;}
+  .app .blurb{font-size:15px;color:#d6dae2;margin:0 0 20px;}
 
-  /* Feature tooltip cards — styled after the ASL Bengals play-card callouts */
-  .features{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:16px;
-    margin-bottom:36px;
-  }
+  /* Feature callouts — styled after the ASL Bengals play-card tooltips */
+  .features{display:grid;gap:12px;margin:0 0 24px;}
   .tooltip{
-    position:relative;
-    background:var(--bg);
-    border:1px solid var(--border);
-    border-radius:14px;
-    padding:18px 18px 16px;
-    transition:transform .15s ease, border-color .15s ease;
+    position:relative;background:var(--bg);border:1px solid var(--border);
+    border-radius:12px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start;
   }
   .tooltip::before{
-    content:"";
-    position:absolute;
-    top:-7px;
-    left:22px;
-    width:14px;
-    height:14px;
-    background:var(--bg);
-    border-left:1px solid var(--border);
-    border-top:1px solid var(--border);
-    transform:rotate(45deg);
-    border-radius:2px 0 0 0;
+    content:"";position:absolute;top:-6px;left:18px;width:11px;height:11px;
+    background:var(--bg);border-left:1px solid var(--border);border-top:1px solid var(--border);
+    transform:rotate(45deg);border-radius:2px 0 0 0;
   }
-  .tooltip:hover{
-    transform:translateY(-3px);
-  }
-  .tooltip .icon{
-    font-size:20px;
-    margin-bottom:8px;
-    display:block;
-  }
-  .tooltip .title{
-    font-weight:700;
-    font-size:14.5px;
-    margin-bottom:4px;
-  }
-  .tooltip .desc{
-    font-size:13.5px;
-    color:var(--muted);
-  }
+  .tooltip .icon{font-size:17px;line-height:1.3;flex:none;}
+  .tooltip .title{font-weight:700;font-size:13.5px;}
+  .tooltip .desc{font-size:13px;color:var(--muted);}
 
   .cta{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    text-decoration:none;
-    font-weight:700;
-    font-size:15px;
-    padding:14px 26px;
-    border-radius:12px;
-    transition:filter .15s, transform .15s;
+    margin-top:auto;align-self:flex-start;
+    display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+    font-weight:700;font-size:14.5px;padding:12px 22px;border-radius:12px;
+    background:var(--ac);color:#0d0f13;transition:filter .15s, transform .15s;
   }
   .cta:hover{filter:brightness(1.1);transform:translateY(-1px);}
-  .cta.disabled{
-    pointer-events:none;
-    opacity:.45;
-    background:var(--panel-2)!important;
-    color:var(--muted)!important;
-  }
-  .status-note{
-    display:block;
-    margin-top:10px;
-    font-size:12.5px;
-    color:var(--muted);
-  }
+  .cta.locked{background:var(--panel-2);color:var(--muted);border:1px solid var(--border);pointer-events:none;}
+  .install{display:block;margin-top:10px;font-size:12.5px;color:var(--muted);}
 
-  /* Per-project accent theming */
-  .bengals .project-eyebrow{background:rgba(255,106,61,.14);color:var(--accent);}
-  .bengals .cta{background:var(--accent);color:#1a0e08;}
-  .bengals .tooltip:hover{border-color:var(--accent);}
+  .football{--ac:var(--football);}
+  .baseball{--ac:var(--baseball);}
+  .cards{--ac:var(--cards);}
+  .family{--ac:var(--family);}
+  .private{--ac:var(--private);}
 
-  .cards .project-eyebrow{background:rgba(61,220,151,.14);color:var(--accent-2);}
-  .cards .cta{background:var(--accent-2);color:#062017;}
-  .cards .tooltip:hover{border-color:var(--accent-2);}
+  /* In the works */
+  .soon{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
+  .soon div{border:1px dashed var(--border);border-radius:14px;padding:16px 18px;}
+  .soon b{display:block;font-size:15px;margin-bottom:2px;}
+  .soon span{font-size:13.5px;color:var(--muted);}
 
-  .dashboard .project-eyebrow{background:rgba(77,157,255,.14);color:var(--accent-3);}
-  .dashboard .cta{background:var(--accent-3);color:#04121f;}
-  .dashboard .tooltip:hover{border-color:var(--accent-3);}
-
-  footer{
-    text-align:center;
-    padding:40px 24px 60px;
-    color:var(--muted);
-    font-size:13px;
-    border-top:1px solid var(--border);
-  }
+  footer{text-align:center;padding:40px 24px 60px;color:var(--muted);font-size:13px;border-top:1px solid var(--border);}
+  footer a{color:var(--text);}
 
   @media (max-width:600px){
-    .hero{padding:64px 20px 48px;}
+    .hero{padding:64px 16px 40px;}
     .hero h1{font-size:32px;}
-    .project-card{padding:28px 22px;}
+    .group{padding:0 16px;}
+    .grid,.soon{grid-template-columns:1fr;}
+    .app{padding:22px;}
   }
 </style>
 </head>
@@ -216,116 +124,187 @@
   <section class="hero">
     <div class="kicker">Portfolio</div>
     <h1>Nathan Steele</h1>
-    <p>A collection of interactive web apps built for youth sports leagues — study tools, digital cards, and season-management dashboards, all designed to run right in the browser.</p>
+    <p>Live web apps I've designed and built with AI as my development partner — for youth football and baseball programs, coaches, families and everyday use. Every one runs in the browser, and most install on a phone like a real app.</p>
+    <div class="stats">
+      <div><b>10</b>live apps</div>
+      <div><b>6</b>install on a phone</div>
+      <div><b>2</b>in the works</div>
+    </div>
     <nav class="hero-nav">
-      <a href="#bengals-signal">Bengals Signal</a>
-      <a href="#lybs-cards">LYBS Virtual Cards</a>
-      <a href="#lybs-dashboard">LYBS Dashboard</a>
+      <a href="#football" style="--ac:var(--football)">🏈 Football</a>
+      <a href="#baseball" style="--ac:var(--baseball)">⚾ Baseball &amp; league</a>
+      <a href="#personal" style="--ac:var(--family)">🧩 Personal</a>
+      <a href="#soon" style="--ac:var(--private)">🛠️ In the works</a>
     </nav>
   </section>
 
-  <!-- Project 1: Bengals Signal -->
-  <section class="project bengals" id="bengals-signal">
-    <div class="project-card">
-      <span class="project-eyebrow">🏈 Study Tool</span>
-      <h2>Bengals Signal — Study Guide &amp; Playbook</h2>
-      <p class="subtitle">Built for the ASL Bengals youth football team</p>
-      <p class="blurb">A mobile-first playbook players actually use. Every hand signal and play call is broken down into an interactive, animated diagram, with quiz modes to build recall before game day.</p>
+  <!-- FOOTBALL -->
+  <section class="group" id="football">
+    <div class="group-head"><h2>🏈 Football</h2><span>ASL Bengals youth football</span></div>
+    <div class="grid">
 
-      <div class="features">
-        <div class="tooltip">
-          <span class="icon">🎓</span>
-          <div class="title">Study Mode</div>
-          <div class="desc">Browse every signal by category with instant visual reference.</div>
+      <article class="app football">
+        <span class="eyebrow">Team Platform</span>
+        <h3>Gridiron Hub</h3>
+        <p class="subtitle">Multi-organization youth football site</p>
+        <p class="blurb">A full team website any youth football organization can run, with the ASL Bengals as the first org — rosters, player pages and real program content, backed by a live database.</p>
+        <div class="features">
+          <div class="tooltip"><span class="icon">🏟️</span><div><div class="title">Multi-Org Ready</div><div class="desc">One codebase, each organization gets its own space.</div></div></div>
+          <div class="tooltip"><span class="icon">👥</span><div><div class="title">Rosters &amp; Player Pages</div><div class="desc">Team rosters with a page for every player.</div></div></div>
+          <div class="tooltip"><span class="icon">📸</span><div><div class="title">Photo Tagging</div><div class="desc">Tag players in team photos and find them later.</div></div></div>
         </div>
-        <div class="tooltip">
-          <span class="icon">⏱️</span>
-          <div class="title">Quiz &amp; Timed Quiz</div>
-          <div class="desc">Score rounds or race the clock through all 30 signals.</div>
-        </div>
-        <div class="tooltip">
-          <span class="icon">📋</span>
-          <div class="title">Interactive Play Calls</div>
-          <div class="desc">Tap a play to open an animated diagram with wing, direction, and motion toggles.</div>
-        </div>
-        <div class="tooltip">
-          <span class="icon">🏆</span>
-          <div class="title">Team Leaderboard</div>
-          <div class="desc">Scores and times are shared across the whole team, not just your own.</div>
-        </div>
-      </div>
+        <a class="cta" href="https://natesteele888.github.io/ASL-Bengals/gridiron-hub/" target="_blank" rel="noopener">Open Gridiron Hub →</a>
+      </article>
 
-      <a class="cta" href="https://natesteele888.github.io/ASL-Bengals/dev/" target="_blank" rel="noopener">Open Bengals Signal →</a>
+      <article class="app football">
+        <span class="eyebrow">Coaching App</span>
+        <h3>Bengals Coaching App</h3>
+        <p class="subtitle">Season management for the 11U team</p>
+        <p class="blurb">The team's week-to-week home: schedule, game cards, a play builder, stat keeper and a 2 Minute Drill trainer — plus a playoff mode with rounds, opponent film and final-week scenarios.</p>
+        <div class="features">
+          <div class="tooltip"><span class="icon">📅</span><div><div class="title">This Week</div><div class="desc">Auto-advances to the next game after each midweek matchup.</div></div></div>
+          <div class="tooltip"><span class="icon">✏️</span><div><div class="title">Play Builder</div><div class="desc">Draw plays and save them to the team playbook.</div></div></div>
+          <div class="tooltip"><span class="icon">🏆</span><div><div class="title">Playoff Mode</div><div class="desc">Bracket rounds, scouting film and game-day flyers.</div></div></div>
+        </div>
+        <a class="cta" href="https://natesteele888.github.io/ASL-Bengals/dev2/index.html" target="_blank" rel="noopener">Open Coaching App →</a>
+        <span class="install">Installs on your phone</span>
+      </article>
+
+      <article class="app football">
+        <span class="eyebrow">Study Tool</span>
+        <h3>Bengals Signal Study Guide</h3>
+        <p class="subtitle">Playbook and signal quiz for players</p>
+        <p class="blurb">The original mobile playbook players actually use. Every hand signal and play call is broken down visually, with quiz modes to build recall before game day.</p>
+        <div class="features">
+          <div class="tooltip"><span class="icon">🎓</span><div><div class="title">Study Mode</div><div class="desc">Browse every signal by category with instant visual reference.</div></div></div>
+          <div class="tooltip"><span class="icon">⏱️</span><div><div class="title">Quiz &amp; Timed Quiz</div><div class="desc">Score rounds or race the clock through all 30 signals.</div></div></div>
+          <div class="tooltip"><span class="icon">📋</span><div><div class="title">Interactive Play Diagrams</div><div class="desc">Animated diagrams with wing, direction and motion toggles.</div></div></div>
+        </div>
+        <a class="cta" href="https://natesteele888.github.io/ASL-Bengals/ASLBengals_Playbook.html" target="_blank" rel="noopener">Open Study Guide →</a>
+      </article>
+
     </div>
   </section>
 
-  <!-- Project 2: LYBS Virtual Cards -->
-  <section class="project cards" id="lybs-cards">
-    <div class="project-card">
-      <span class="project-eyebrow">🃏 Digital Cards</span>
-      <h2>LYBS &amp; Montachusett Virtual Cards</h2>
-      <p class="subtitle">Personalized digital trading cards for players</p>
-      <p class="blurb">Every registered player gets their own shareable card page — pulled straight from their roster info, styled like a real trading card, and easy to send with one link.</p>
+  <!-- BASEBALL -->
+  <section class="group" id="baseball">
+    <div class="group-head"><h2>⚾ Baseball &amp; League</h2><span>Lunenburg Youth Baseball &amp; Softball</span></div>
+    <div class="grid">
 
-      <div class="features">
-        <div class="tooltip">
-          <span class="icon">🎴</span>
-          <div class="title">Personalized Packs</div>
-          <div class="desc">Every player gets their own link with custom cards built from their roster data.</div>
+      <article class="app baseball">
+        <span class="eyebrow">League Dashboard</span>
+        <h3>LYBS Dashboard</h3>
+        <p class="subtitle">The league's reporting and operations hub</p>
+        <p class="blurb">A 22-tab dashboard for running a volunteer league — registration and retention trends, governance, coaching, schedules, social planning and a TV-style live draft board.</p>
+        <div class="features">
+          <div class="tooltip"><span class="icon">📈</span><div><div class="title">Registration Analytics</div><div class="desc">Year-over-year trends by sport and division.</div></div></div>
+          <div class="tooltip"><span class="icon">🧢</span><div><div class="title">Draft Day Board</div><div class="desc">Live TV and phone views for draft night.</div></div></div>
+          <div class="tooltip"><span class="icon">📷</span><div><div class="title">Photo Pipeline</div><div class="desc">Parents submit photos and wins; the board approves them.</div></div></div>
         </div>
-        <div class="tooltip">
-          <span class="icon">⚾</span>
-          <div class="title">Multi-League Support</div>
-          <div class="desc">Players on both LYBS and Montachusett can choose either pack from one link.</div>
-        </div>
-        <div class="tooltip">
-          <span class="icon">🔗</span>
-          <div class="title">Shareable Links</div>
-          <div class="desc">Send a direct link straight to a player's card page — no login needed.</div>
-        </div>
-      </div>
+        <a class="cta" href="https://lybs-dashboard.web.app/" target="_blank" rel="noopener">Open LYBS Dashboard →</a>
+      </article>
 
-      <a class="cta" href="https://natesteele888.github.io/lybs-cards/" target="_blank" rel="noopener">View LYBS Cards →</a>
+      <article class="app baseball">
+        <span class="eyebrow">Team App</span>
+        <h3>LYBS Ballclub</h3>
+        <p class="subtitle">For coaches and families</p>
+        <p class="blurb">Everything a team needs in one place: schedule, practices, lineups, drills, situations, standings and announcements — with coach contacts a tap away for rainouts and reschedules.</p>
+        <div class="features">
+          <div class="tooltip"><span class="icon">📝</span><div><div class="title">Lineups &amp; Practices</div><div class="desc">Build lineups and plan practices with a drill library.</div></div></div>
+          <div class="tooltip"><span class="icon">📣</span><div><div class="title">Announcements</div><div class="desc">Cancellations and updates straight to families.</div></div></div>
+          <div class="tooltip"><span class="icon">📊</span><div><div class="title">Standings &amp; Situations</div><div class="desc">League standings and on-field situation drills.</div></div></div>
+        </div>
+        <a class="cta" href="https://natesteele888.github.io/lybs-ballclub/" target="_blank" rel="noopener">Open Ballclub →</a>
+        <span class="install">Installs on your phone</span>
+      </article>
+
+      <article class="app baseball">
+        <span class="eyebrow">Training App</span>
+        <h3>Where Do I Go?</h3>
+        <p class="subtitle">Baseball situations trainer</p>
+        <p class="blurb">Teaches players where to be on every batted ball. A rules engine covers 1,320 situations — every fielder, base runner and out count — on an animated field you can play, pause and scrub.</p>
+        <div class="features">
+          <div class="tooltip"><span class="icon">🧠</span><div><div class="title">707-Rule Engine</div><div class="desc">Jobs change with runners on base and the number of outs.</div></div></div>
+          <div class="tooltip"><span class="icon">▶️</span><div><div class="title">Animated Field</div><div class="desc">Watch every player move, step by step.</div></div></div>
+          <div class="tooltip"><span class="icon">🔁</span><div><div class="title">Cutoffs &amp; Relays</div><div class="desc">Covers the throws, not just the catch.</div></div></div>
+        </div>
+        <a class="cta" href="https://natesteele888.github.io/apps/situations/" target="_blank" rel="noopener">Open Where Do I Go? →</a>
+        <span class="install">Installs on your phone</span>
+      </article>
+
+      <article class="app cards">
+        <span class="eyebrow">Digital Cards</span>
+        <h3>Steele Cards</h3>
+        <p class="subtitle">Trading card packs for youth teams</p>
+        <p class="blurb">Players rip open a digital pack of their team's cards — with gift links, a collection to fill and rare holo parallels. Nothing to sign up for; families just share a link.</p>
+        <div class="features">
+          <div class="tooltip"><span class="icon">🎴</span><div><div class="title">Pack Opening</div><div class="desc">Tear-open animation with a card reveal.</div></div></div>
+          <div class="tooltip"><span class="icon">✨</span><div><div class="title">Holo Parallels</div><div class="desc">Rare foil versions to chase.</div></div></div>
+          <div class="tooltip"><span class="icon">🎁</span><div><div class="title">Gift Links</div><div class="desc">Send a pack to a teammate with one link.</div></div></div>
+        </div>
+        <a class="cta" href="https://natesteele888.github.io/lybs-cards/" target="_blank" rel="noopener">Open Steele Cards →</a>
+      </article>
+
     </div>
   </section>
 
-  <!-- Project 3: LYBS Dashboard -->
-  <section class="project dashboard" id="lybs-dashboard">
-    <div class="project-card">
-      <span class="project-eyebrow">📊 Season Dashboard</span>
-      <h2>LYBS Dashboard &amp; Draft Experience</h2>
-      <p class="subtitle">Registration analytics and live draft day, in one app</p>
-      <p class="blurb">A season-management dashboard for Lunenburg Youth Baseball &amp; Softball — registration trends, retention, and All-Star eligibility, plus a TV-style live draft board for draft day.</p>
+  <!-- PERSONAL -->
+  <section class="group" id="personal">
+    <div class="group-head"><h2>🧩 Personal</h2><span>Everyday tools</span></div>
+    <div class="grid">
 
-      <div class="features">
-        <div class="tooltip">
-          <span class="icon">📈</span>
-          <div class="title">Registration Analytics</div>
-          <div class="desc">Year-over-year trends by sport and division, with a revenue snapshot.</div>
+      <article class="app family">
+        <span class="eyebrow">Speedcubing</span>
+        <h3>Cube Clock</h3>
+        <p class="subtitle">Offline-first speedcubing timer</p>
+        <p class="blurb">A Rubik's cube timer that works with no signal: six puzzle types, official-notation scrambles and home-screen shortcuts.</p>
+        <div class="features">
+          <div class="tooltip"><span class="icon">🎲</span><div><div class="title">Six Puzzle Types</div><div class="desc">Each with its own official-notation scrambles.</div></div></div>
+          <div class="tooltip"><span class="icon">📴</span><div><div class="title">Works Offline</div><div class="desc">Times and scrambles with no connection.</div></div></div>
         </div>
-        <div class="tooltip">
-          <span class="icon">🧢</span>
-          <div class="title">Draft Day Board</div>
-          <div class="desc">A live TV and mobile-friendly draft experience for draft night.</div>
-        </div>
-        <div class="tooltip">
-          <span class="icon">🩺</span>
-          <div class="title">League Health</div>
-          <div class="desc">Retention tracking that matches returning players season over season.</div>
-        </div>
-        <div class="tooltip">
-          <span class="icon">🔒</span>
-          <div class="title">Privacy-First</div>
-          <div class="desc">All personal data is scrubbed before it ever reaches the app.</div>
-        </div>
-      </div>
+        <a class="cta" href="https://natesteele888.github.io/cube-clock/" target="_blank" rel="noopener">Open Cube Clock →</a>
+        <span class="install">Installs on your phone</span>
+      </article>
 
-      <a class="cta" href="https://natesteele888.github.io/lybs-dashboard/" target="_blank" rel="noopener">Open LYBS Dashboard →</a>
+      <article class="app family">
+        <span class="eyebrow">Training Program</span>
+        <h3>Offseason Power Program</h3>
+        <p class="subtitle">9-week youth athlete training app</p>
+        <p class="blurb">A morning checklist for plyometrics, core and light strength work, plus kicker-specific drills — with a progress tab that tracks jumps, sprints and left/right balance over time.</p>
+        <div class="features">
+          <div class="tooltip"><span class="icon">✅</span><div><div class="title">Daily Checklist</div><div class="desc">Phased plan that builds week by week.</div></div></div>
+          <div class="tooltip"><span class="icon">📏</span><div><div class="title">Progress Tracking</div><div class="desc">Broad jump, plank, sprint and a left-right gap readout.</div></div></div>
+        </div>
+        <a class="cta" href="https://natesteele888.github.io/fitness-hub/" target="_blank" rel="noopener">Open Power Program →</a>
+        <span class="install">Installs on your phone</span>
+      </article>
+
+      <article class="app private">
+        <span class="eyebrow">Private · Sign-in</span>
+        <h3>Nate's Toolbox</h3>
+        <p class="subtitle">My build tracker and app launcher</p>
+        <p class="blurb">The command center behind everything on this page: every app in progress, where each one left off, task lists and future features, and one-tap launch — installed on my phone.</p>
+        <div class="features">
+          <div class="tooltip"><span class="icon">🗂️</span><div><div class="title">Apps Board</div><div class="desc">Status of every build at a glance.</div></div></div>
+          <div class="tooltip"><span class="icon">🔐</span><div><div class="title">Private by Design</div><div class="desc">Code is public; data stays behind Google sign-in.</div></div></div>
+        </div>
+        <span class="cta locked">🔒 Private app</span>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- IN THE WORKS -->
+  <section class="group" id="soon">
+    <div class="group-head"><h2>🛠️ In the works</h2><span>Built, not yet launched</span></div>
+    <div class="soon">
+      <div><b>Steele Events</b><span>Reusable invitation and RSVP app — themes, custom questions, plus-ones, capacity and co-hosts.</span></div>
+      <div><b>League Ops in a Box</b><span>A youth league operations platform any organization can set up for itself.</span></div>
     </div>
   </section>
 
   <footer>
-    Built and maintained by Nathan Steele.
+    Built and maintained by Nathan Steele · <a href="https://github.com/natesteele888" target="_blank" rel="noopener">GitHub</a>
   </footer>
 
 </body>
