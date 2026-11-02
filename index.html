@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="/apps/icons/portfolio-192.png">
+<link rel="apple-touch-icon" href="/apps/icons/portfolio-512.png">
 <meta name="theme-color" content="#0f1115">
 <meta name="description" content="Live web apps built by Nathan Steele for youth sports leagues, coaches, families and everyday use.">
 <title>Nathan Steele — App Portfolio</title>
@@ -307,5 +310,6 @@
     Built and maintained by Nathan Steele · <a href="https://github.com/natesteele888" target="_blank" rel="noopener">GitHub</a>
   </footer>
 
+<script>if("serviceWorker" in navigator){addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}</script>
 </body>
 </html>
